@@ -1,0 +1,31 @@
+components:
+  schemas:
+
+#-- enums
+    LgoEventType:
+      type: string
+      enum:
+        - Undefined
+        - LeagueGameStateChanged
+
+#-- abstract classes
+    LgoEvent:
+      type: object
+      discriminator:
+        propertyName: Type
+      properties:
+        Type:
+          $ref: "#/components/schemas/LgoEventType"
+
+#-- concrete classes
+    LgoLeagueGameStateChangedEvent:
+      allOf:
+        - $ref: "#/components/schemas/LgoEvent"
+        - type: object
+          properties:
+            OldGameState:
+              $ref: "league-game.yml/#/components/schemas/LeagueGameStateType"
+            NewGameState:
+              $ref: "league-game.yml/#/components/schemas/LeagueGameStateType"
+            Game:
+              $ref: "league-game.yml/#/components/schemas/LeagueGame"

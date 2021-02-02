@@ -1,0 +1,87 @@
+components:
+  schemas:
+
+#-- enums
+    LeagueTeamType:
+      type: string
+      enum:
+        - Undefined
+        - Blue
+        - Red
+        - Neutral
+
+    LeagueDragonType:
+      type: string
+      enum:
+        - Undefined
+        - Infernal
+        - Ocean
+        - Mountain
+        - Cloud
+        - Elder
+
+    LeagueInhibitorTierType:
+      type: string
+      enum:
+        - Undefined
+        - Top
+        - Middle
+        - Bottom
+
+    LeagueTurretTierType:
+      type: string
+      enum:
+        - Undefined
+        - TopOuter
+        - TopInner
+        - TopInhibitor
+        - MiddleOuter
+        - MiddleInner
+        - MiddleInhibitor
+        - MiddleNexusTop
+        - MiddleNexusBottom
+        - BottomOuter
+        - BottomInner
+        - BottomInhibitor
+
+#-- abstract classes
+    LeagueGoldOwner:
+      type: object
+      properties:
+        TotalGoldOwned:
+          type: number
+          format: int32
+        UnspentKills:
+          type: number
+          format: int32
+        UnspentAssists:
+          type: number
+          format: int32
+        UnspentDeaths:
+          type: number
+          format: int32
+        TotalKills:
+          type: number
+          format: int32
+        TotalAssists:
+          type: number
+          format: int32
+        TotalDeaths:
+          type: number
+          format: int32
+
+    LeagueMatchup:
+      type: object
+      properties:
+        Id:
+          type: number
+          format: int32
+        BlueSideCompetitor:
+          $ref: "#/components/schemas/LeagueGoldOwner"
+        RedSideCompetitor:
+          $ref: "#/components/schemas/LeagueGoldOwner"
+        GoldDifference:
+          type: number
+          format: int32
+        WinningTeam:
+          $ref: "#/components/schemas/LeagueTeamType"

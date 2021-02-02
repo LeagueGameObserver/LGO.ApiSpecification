@@ -1,0 +1,150 @@
+components:
+  schemas:
+    LeagueGameEventType:
+      type: string
+      enum:
+        - Undefined
+        - GameStarted
+        - TurretDestroyed
+        - InhibitorDestroyed
+        - DragonKilled
+        - RiftHeraldKilled
+        - BaronNashorKilled
+        - ChampionKilled
+        - MultipleChampionsKilled
+        - TeamKilled
+        - ItemsChanged
+        - GameEnded
+
+#-- structures
+    LeagueTurret:
+      type: object
+      properties:
+        Team:
+          $ref: "#/components/schemas/LeagueTeamType"
+        Tier:
+          $ref: "#/components/schemas/LeagueTurretTierType"
+
+    LeagueInhibitor:
+      type: object
+      properties:
+        Team:
+          $ref: "#/components/schemas/LeagueTeamType"
+        Tier:
+          $ref: "#/components/schemas/LeagueInhibitorTierType"
+
+#-- abstract events
+    LeagueGameEvent:
+      type: object
+      discriminator:
+        propertyName: Type
+      properties:
+        Type:
+          $ref: "#/components/schemas/LeagueGameEventType"
+        GameTimeInSeconds:
+          type: number
+          format: double
+
+    LeagueKillerGameEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueGameEvent"
+        - type: object
+          properties:
+            KillerName:
+              type: string
+              description: "The name of the killer. Could be the name of a summoner, a minion's name, or a neutral objective's name."
+
+    LeagueKillerWithAssistersGameEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueKillerGameEvent"
+        - type: object
+          properties:
+            AssisterNames:
+              type: array
+              item: string
+
+    LeagueNeutralObjectiveKilledEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueKillerWithAssistersGameEvent"
+        - type: object
+          properties:
+            WasStolen:
+              type: boolean
+
+#-- concrete events
+    LeagueGameStartedEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueGameEvent"
+
+    LeagueTurretDestroyedEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueKillerWithAssistersGameEvent"
+        - type: object
+          properties:
+            Turret:
+              $ref: "#/components/schemas/LeagueTurret"
+    
+    LeagueInhibitorDestroyedEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueKillerWithAssistersGameEvent"
+        - type: object
+          properties:
+            Inhibitor:
+              $ref: "#/components/schemas/LeagueInhibitor"
+
+    LeagueDragonKilledEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueNeutralObjectiveKilledEvent"
+        - type: object
+          properties:
+            Dragon:
+              $ref: "league-common.yml/#/components/schemas/LeagueDragonType"
+
+    LeagueRiftHeraldKilledEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueNeutralObjectiveKilledEvent"
+
+    LeagueBaronNashorKilledEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueNeutralObjectiveKilledEvent"
+
+    LeagueChampionKilledEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueKillerWithAssistersGameEvent"
+        - type: object
+          properties:
+            VictimSummonerName:
+              type: string
+
+    LeagueMultipleChampionsKilledEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueKillerGameEvent"
+        - type: object
+          properties:
+            NumberOfKills:
+              type: number
+              format: int32
+
+    LeagueTeamKilledEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueKillerGameEvent"
+
+    LeagueItemsChangedEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueGameEvent"
+        - type: object
+          properties:
+            Player:
+              $ref: "league-player.yml/#/components/schemas/LeaguePlayer"
+            AddedItems:
+              type: array
+              item:
+                $ref: "league-item.yml/#/components/schemas/LeagueItem"
+            RemovedItems:
+              type: array
+              item:
+                $ref: "league-item.yml/#/components/schemas/LeagueItem"
+
+    LeagueGameEndedEvent:
+      allOf:
+        - $ref: "#/components/schemas/LeagueGameEvent"

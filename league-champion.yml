@@ -1,0 +1,34 @@
+components:
+  schemas:
+    LeagueChampion:
+      type: object
+      properties:
+        Id:
+          type: number
+          format: int32
+        Name:
+          type: string
+        TileImage:
+          type: string
+        SplashImage:
+          type: string
+        LoadingImage:
+          type: string
+
+    LgoLeagueChampionRetrievalConfiguration:
+      allOf:
+        - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
+        - type: object
+          properties:
+            IncludeName:
+              type: boolean
+              default: true
+            IncludeTileImage:
+              type: boolean
+              default: true
+            IncludeSplashImage:
+              type: boolean
+              default: true
+            IncludeLoadingImage:
+              type: boolean
+              default: true

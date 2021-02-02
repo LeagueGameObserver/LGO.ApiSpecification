@@ -1,0 +1,51 @@
+components:
+  schemas:
+    LeaguePlayer:
+      allOf:
+        - $ref: "league-common.yml/#/components/schemas/LeagueGoldOwner"
+        - type: object
+          properties:
+            SummonerName:
+              type: string
+            Team:
+              $ref: "league-common.yml/#/components/schemas/LeagueTeamType"
+            Champion:
+              $ref: "league-champion.yml/#/components/schemas/LeagueChampion"
+            Items:
+              type: array
+              items:
+                $ref: "league-item.yml/#/components/schemas/LeagueItem"
+    
+    LgoLeaguePlayerRetrievalConfiguration:
+      allOf:
+        - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
+        - type: object
+          properties:
+            IncludeTeam:
+              type: boolean
+              default: true
+            IncludeChampion:
+              type: boolean
+              default: true
+            IncludeItems:
+              type: boolean
+              default: true
+
+    LeaguePositionType:
+      type: string
+      enum:
+        - Undefined
+        - Top
+        - Jungle
+        - Middle
+        - Bottom
+        - Support
+
+    LeaguePlayerMatchup:
+      allOf:
+        - $ref: "league-common.yml/#/components/schemas/LeagueMatchup"
+        - type: object
+          properties:
+            Position:
+              $ref: "#/components/schemas/LeaguePositionType"
+            

@@ -1,0 +1,98 @@
+components:
+  schemas:
+
+#-- enums
+    LeagueTimerType:
+      type: string
+      enum:
+        - Undefined
+        - DragonRespawn
+        - RiftHeraldRespawn
+        - BaronNashorRespawn
+        - InhibitorRespawn
+        - BaronNashorPowerPlay
+        - ElderDragonPowerPlay
+
+#-- abstract classes
+    LeagueTimer:
+      type: object
+      discriminator:
+        propertyName: Type
+      properties:
+        Type:
+          $ref: "#/components/schemas/LeagueTimerType"
+        RemainingTimeInSeconds:
+          trpe: number
+          format: double
+        GameStartTimeInSeconds:
+          type: number
+          format: double
+        GameEndTimeInSeconds:
+          type: number
+          format: double
+
+    LeaguePowerPlayTimer:
+      allOf:
+        - $ref: "#/components/schemas/LeagueTimer"
+        - type: object
+          properties:
+            Team:
+              $ref: "league-common.yml/#/components/schemas/LeagueTeamType"
+            IsActive:
+              type: boolean
+              description: "Indicates whether the power play is still active. This property can be false prior to the actual timer expiration if, for example, all team members lost the neutral objective buff."
+            Macthups:
+              type: array
+              items:
+                $ref: "#/components/schemas/LeaguePowerPlayMatchup"
+            
+#-- concrete classes
+    LgoLeagueTimerRetrievalConfiguration:
+      allOf:
+        - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
+        - type: object
+          properties:
+            IncludeGameStartTimeInSeconds:
+              type: boolean
+              default: true
+            IncludeGameEndTimeInSeconds:
+              type: boolean
+              default: true
+
+    LeaguePowerPlayMatchup:
+      type: object
+      properties:
+        Matchup:
+          $ref: "league-common.yml/#/components/schemas/LeagueMatchup"
+        GoldDifferenceIncrease:
+          type: number
+          format: int32
+          description: "The increase of the gold difference in the specific LeagueMatchup since the PowerPlay started. This value is always from the team's perspective that is currently having the PowerPlay."
+
+    LeagueDragonRespawnTimer:
+      allOf:
+        - $ref: "#/components/schemas/LeagueTimer"
+
+    LeagueRiftHeraldRespawnTimer:
+      allOf:
+        - $ref: "#/components/schemas/LeagueTimer"
+
+    LeagueBaronNashorRespawnTimer:
+      allOf:
+        - $ref: "#/components/schemas/LeagueTimer"
+
+    LeagueInhibitorRespawnTimer:
+      allOf:
+        - $ref: "#/components/schemas/LeagueTimer"
+        - type: object
+          properties:
+            Inhibitor:
+              $ref: "league-common.yml/#/components/schemas/LeagueInhibitor"
+
+    LeagueBaronNashorPowerPlayTimer:
+      allOf:
+        - $ref: "#/components/schemas/LeaguePowerPlayTimer"
+
+    LeagueElderDragonPowerPlayTimer:
+      allOf:
+        - $ref: "#/components/schemas/LeaguePowerPlayTimer"

@@ -1,0 +1,23 @@
+components:
+  schemas:
+
+#-- enums
+    LgoDataRetrievalType:
+      type: string
+      enum:
+        - Undefined
+        - LeagueItem
+        - LeagueChampion
+        - LeaguePlayer
+        - LeagueTeam
+        - LeagueTimer
+        - LeagueGame
+
+#-- abstract classes
+    LgoDataRetrievalConfiguration:
+      type: object
+      discriminator:
+        propertyName: Type
+      properties:
+        Type:
+          $ref: "#/components/schemas/LgoDataRetrievalType"

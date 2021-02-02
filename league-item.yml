@@ -1,0 +1,30 @@
+components:
+  schemas:
+    LeagueItem:
+      type: object
+      properties:
+        Id:
+          type: number
+          format: int32
+        Name:
+          type: string
+        Price:
+          type: number
+          foramt: int32
+        Image:
+          type: string
+
+    LgoLeagueItemRetrievalConfiguration:
+      allOf:
+        - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
+        - type: object
+          properties:
+            IncludeName:
+              type: boolean
+              default: true
+            IncludePrice:
+              type: boolean
+              default: true
+            IncludeImage:
+              type: boolean
+              default: true

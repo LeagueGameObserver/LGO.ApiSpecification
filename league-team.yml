@@ -1,0 +1,52 @@
+components:
+  schemas:
+    LeagueTeam:
+      allOf:
+        - $ref: "league-common.yml/#/components/schemas/LeagueGoldOwner"
+        - type: object
+          properties:
+            Side:
+              $ref: "league-common.yml/#/components/schemas/LeagueTeamType"
+            DragonsKilled:
+              type: array
+              items:
+                $ref: "league-common.yml/#/components/schemas/LeagueDragonType"
+            NumberOfRiftHeraldsKilled:
+              type: number
+              format: int32
+            NumberOfBaronNashorsKilled:
+              type: number
+              format: int32
+            TurretsDestroyed:
+              type: array
+              items:
+                $ref: "league-common.yml/#/components/schemas/LeagueTurretTierType"
+            InhibitorsDestroyed:
+              type: array
+              items:
+                $ref: "league-common.yml/#/components/schemas/LeagueInhibitorTierType"
+    
+    LgoLeagueTeamRetrievalConfiguration:
+      allOf:
+        - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
+        - type: object
+          properties:
+            IncludeDragonsKilled:
+              type: boolean
+              default: true
+            IncludeNumberOfRiftHeraldsKilled:
+              type: boolean
+              default: true
+            IncludeNumberOfBaronNashorsKilled:
+              type: boolean
+              default: true
+            IncludeTurretsDestroyed:
+              type: boolean
+              default: true
+            IncludeInhibitorsDestroyed:
+              type: boolean
+              default: true
+
+    LeagueTeamMatchup:
+      allOf:
+        - $ref: "league-common.yml/#/components/schemas/LeagueMatchup"

@@ -1,0 +1,81 @@
+components:
+  schemas:
+
+#-- enums
+    LeagueGameStateType:
+      type: string
+      enum:
+        - Undefined
+        - Loading
+        - Running
+        - Ended
+
+    LeagueGameModeType:
+      type: string
+      enum:
+        - Undefined
+        - Classic5x5
+        - Aram
+
+#-- concrete classes
+    LeagueGame:
+      type: object
+      properties:
+        Id:
+          type: number
+          format: int32
+        State:
+          $ref: "#/components/schemas/LeagueGameStateType"
+        GameTimeInSeconds:
+          type: number
+          format: double
+        Mode:
+          $ref: "#/components/schemas/LeagueGameModeType" 
+        Teams:
+          type: array
+          items:
+            $ref: "league-team.yml/#/components/schemas/LeagueTeam"
+        Players:
+          type: array
+          items:
+            $ref: "league-player.yml/#/components/schemas/LeaguePlayer"
+        Matchups:
+          type: array
+          items:
+            $ref: "league-common.yml/#/components/schemas/LeagueMatchup"
+        Timers:
+          type: array
+          items:
+            $ref: "league-timer.yml/#/components/schemas/LeagueTimer"
+        Events:
+          type: array
+          items:
+            $ref: "league-event.yml/#/components/schemas/LeagueEvent"
+        EventsSinceLastUpdate:
+          type: array
+          items:
+            $ref: "league-event.yml/#/components/schemas/LeagueEvent"
+
+    LgoLeagueGameRetrievalConfiguration:
+      allOf:
+        - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
+        - type: object
+          properties:
+            IncludeTeams:
+              type: boolean
+              default: true
+            IncludePlayers:
+              type: boolean
+              default: true
+            IncludeMatchups:
+              type: boolean
+              default: true
+            IncludeTimers:
+              type: boolean
+              default: true
+            IncludeEvents:
+              type: boolean
+              default: true
+            InvludeEventsSinceLastUpdate:
+              type: boolean
+              default: true        
