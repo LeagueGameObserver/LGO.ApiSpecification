@@ -7,6 +7,7 @@ components:
       enum:
         - Undefined
         - LeagueGameStateChanged
+        - LeagueGameUpdated
 
 #-- abstract classes
     LgoEvent:
@@ -27,5 +28,13 @@ components:
               $ref: "league-game.yml/#/components/schemas/LeagueGameStateType"
             NewGameState:
               $ref: "league-game.yml/#/components/schemas/LeagueGameStateType"
+            Game:
+              $ref: "league-game.yml/#/components/schemas/LeagueGame"
+
+    LgoLeagueGameUpdatedEvent:
+      allOf:
+        - $ref: "#/components/schemas/LgoEvent"
+        - type: object
+          properties:
             Game:
               $ref: "league-game.yml/#/components/schemas/LeagueGame"
