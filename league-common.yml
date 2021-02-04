@@ -70,12 +70,12 @@ components:
           type: number
           format: int32
 
-    LeagueMatchup:
+    LeagueMatchUp:
       type: object
       properties:
         Id:
-          type: number
-          format: int32
+          type: string
+          format: uuid
         BlueSideCompetitor:
           $ref: "#/components/schemas/LeagueGoldOwner"
         RedSideCompetitor:

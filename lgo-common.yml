@@ -2,7 +2,7 @@ components:
   schemas:
 
 #-- enums
-    LgoDataRetrievalType:
+    LgoDataRetrievalConfigurationType:
       type: string
       enum:
         - Undefined
@@ -11,6 +11,7 @@ components:
         - LeaguePlayer
         - LeagueTeam
         - LeagueTimer
+        - LeaguePowerPlayTimer
         - LeagueGame
 
 #-- abstract classes
@@ -20,4 +21,4 @@ components:
         propertyName: Type
       properties:
         Type:
-          $ref: "#/components/schemas/LgoDataRetrievalType"
+          $ref: "#/components/schemas/LgoDataRetrievalConfigurationType"

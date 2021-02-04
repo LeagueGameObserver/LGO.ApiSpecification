@@ -4,8 +4,8 @@ components:
       type: object
       properties:
         Id:
-          type: number
-          format: int32
+          type: string
+          format: uuid
         Name:
           type: string
         TileImage:

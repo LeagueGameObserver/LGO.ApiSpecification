@@ -7,14 +7,14 @@ components:
       enum:
         - Undefined
         - Loading
-        - Running
+        - InProgress
         - Ended
 
     LeagueGameModeType:
       type: string
       enum:
         - Undefined
-        - Classic5x5
+        - Classic5X5
         - Aram
 
 #-- concrete classes
@@ -22,8 +22,8 @@ components:
       type: object
       properties:
         Id:
-          type: number
-          format: int32
+          type: string
+          format: uuid
         State:
           $ref: "#/components/schemas/LeagueGameStateType"
         GameTimeInSeconds:
@@ -39,7 +39,7 @@ components:
           type: array
           items:
             $ref: "league-player.yml/#/components/schemas/LeaguePlayer"
-        Matchups:
+        MatchUps:
           type: array
           items:
             $ref: "league-common.yml/#/components/schemas/LeagueMatchup"
@@ -67,7 +67,7 @@ components:
             IncludePlayers:
               type: boolean
               default: true
-            IncludeMatchups:
+            IncludeMatchUps:
               type: boolean
               default: true
             IncludeTimers:

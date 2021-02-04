@@ -5,6 +5,9 @@ components:
         - $ref: "league-common.yml/#/components/schemas/LeagueGoldOwner"
         - type: object
           properties:
+            Id:
+              type: string
+              format: uuid
             SummonerName:
               type: string
             Team:
@@ -41,9 +44,9 @@ components:
         - Bottom
         - Support
 
-    LeaguePlayerMatchup:
+    LeaguePlayerMatchUp:
       allOf:
-        - $ref: "league-common.yml/#/components/schemas/LeagueMatchup"
+        - $ref: "league-common.yml/#/components/schemas/LeagueMatchUp"
         - type: object
           properties:
             Position:

@@ -5,6 +5,9 @@ components:
         - $ref: "league-common.yml/#/components/schemas/LeagueGoldOwner"
         - type: object
           properties:
+            Id:
+              type: string
+              format: uuid
             Side:
               $ref: "league-common.yml/#/components/schemas/LeagueTeamType"
             DragonsKilled:
@@ -47,6 +50,6 @@ components:
               type: boolean
               default: true
 
-    LeagueTeamMatchup:
+    LeagueTeamMatchUp:
       allOf:
-        - $ref: "league-common.yml/#/components/schemas/LeagueMatchup"
+        - $ref: "league-common.yml/#/components/schemas/LeagueMatchUp"

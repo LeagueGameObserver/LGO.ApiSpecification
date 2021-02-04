@@ -41,12 +41,22 @@ components:
             IsActive:
               type: boolean
               description: "Indicates whether the power play is still active. This property can be false prior to the actual timer expiration if, for example, all team members lost the neutral objective buff."
-            Macthups:
+            MacthUps:
               type: array
               items:
-                $ref: "#/components/schemas/LeaguePowerPlayMatchup"
+                $ref: "#/components/schemas/LeaguePowerPlayMatchUp"
             
 #-- concrete classes
+    LeaguePowerPlayMatchUp:
+      type: object
+      properties:
+        Matchup:
+          $ref: "league-common.yml/#/components/schemas/LeagueMatchUp"
+        GoldDifferenceIncrease:
+          type: number
+          format: int32
+          description: "The increase of the gold difference in the specific LeagueMatchup since the PowerPlay started. This value is always from the team's perspective that is currently having the PowerPlay."
+
     LgoLeagueTimerRetrievalConfiguration:
       allOf:
         - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
@@ -59,15 +69,17 @@ components:
               type: boolean
               default: true
 
-    LeaguePowerPlayMatchup:
-      type: object
-      properties:
-        Matchup:
-          $ref: "league-common.yml/#/components/schemas/LeagueMatchup"
-        GoldDifferenceIncrease:
-          type: number
-          format: int32
-          description: "The increase of the gold difference in the specific LeagueMatchup since the PowerPlay started. This value is always from the team's perspective that is currently having the PowerPlay."
+    LgoLeaguePowerPlayTimerRetrievalConfiguration:
+      allOf:
+        - $ref: "#/components/schemas/LgoLeagueTimerRetrievalConfiguration"
+        - type: object
+          properties:
+            IncludeIsActive:
+              type: boolean
+              default: true
+            IncludeMatchUps:
+              type: boolean
+              default: true
 
     LeagueDragonRespawnTimer:
       allOf:

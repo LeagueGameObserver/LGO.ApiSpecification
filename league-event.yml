@@ -63,7 +63,7 @@ components:
               type: array
               item: string
 
-    LeagueNeutralObjectiveKilledEvent:
+    LeagueNeutralObjectiveKilledGameEvent:
       allOf:
         - $ref: "#/components/schemas/LeagueKillerWithAssistersGameEvent"
         - type: object
