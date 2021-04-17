@@ -14,8 +14,9 @@ components:
       type: string
       enum:
         - Undefined
-        - Classic5X5
+        - Classic
         - Aram
+        - PracticeTool
 
 #-- concrete classes
     LeagueGame:
@@ -26,7 +27,7 @@ components:
           format: uuid
         State:
           $ref: "#/components/schemas/LeagueGameStateType"
-        GameTimeInSeconds:
+        InGameTimeInSeconds:
           type: number
           format: double
         Mode:
@@ -61,6 +62,12 @@ components:
         - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
         - type: object
           properties:
+            IncludeInGameTimeInSeconds:
+              type: boolean
+              default: true
+            IncludeMode:
+              type: boolean
+              default: true
             IncludeTeams:
               type: boolean
               default: true

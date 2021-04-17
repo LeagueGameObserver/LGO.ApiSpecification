@@ -24,6 +24,9 @@ components:
         - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
         - type: object
           properties:
+            IncludeSummonerName:
+              type: boolean
+              default: true
             IncludeTeam:
               type: boolean
               default: true

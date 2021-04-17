@@ -34,6 +34,9 @@ components:
         - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
         - type: object
           properties:
+            InlcudeSide:
+              type: boolean
+              default: true
             IncludeDragonsKilled:
               type: boolean
               default: true

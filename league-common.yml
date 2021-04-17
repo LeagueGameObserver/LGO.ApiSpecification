@@ -38,8 +38,8 @@ components:
         - MiddleOuter
         - MiddleInner
         - MiddleInhibitor
-        - MiddleNexusTop
-        - MiddleNexusBottom
+        - NexusTop
+        - NexusBottom
         - BottomOuter
         - BottomInner
         - BottomInhibitor

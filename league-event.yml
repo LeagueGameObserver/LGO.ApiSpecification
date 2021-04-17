@@ -41,7 +41,7 @@ components:
       properties:
         Type:
           $ref: "#/components/schemas/LeagueGameEventType"
-        GameTimeInSeconds:
+        InGameTimeInSeconds:
           type: number
           format: double
 
@@ -59,7 +59,7 @@ components:
         - $ref: "#/components/schemas/LeagueKillerGameEvent"
         - type: object
           properties:
-            AssisterNames:
+            AssistersNames:
               type: array
               item: string
 

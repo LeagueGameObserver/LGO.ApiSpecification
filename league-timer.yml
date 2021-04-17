@@ -24,10 +24,10 @@ components:
         RemainingTimeInSeconds:
           trpe: number
           format: double
-        GameStartTimeInSeconds:
+        InGameStartTimeInSeconds:
           type: number
           format: double
-        GameEndTimeInSeconds:
+        InGameEndTimeInSeconds:
           type: number
           format: double
 
@@ -62,10 +62,10 @@ components:
         - $ref: "lgo-common.yml/#/components/schemas/LgoDataRetrievalConfiguration"
         - type: object
           properties:
-            IncludeGameStartTimeInSeconds:
+            IncludeInGameStartTimeInSeconds:
               type: boolean
               default: true
-            IncludeGameEndTimeInSeconds:
+            IncludeInGameEndTimeInSeconds:
               type: boolean
               default: true
 
