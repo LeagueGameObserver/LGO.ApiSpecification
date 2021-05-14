@@ -4,10 +4,11 @@ components:
       type: object
       properties:
         Id:
-          type: string
-          format: uuid
+          type: int32
         Name:
           type: string
+        Amount:
+          type: int32
         Price:
           type: number
           foramt: int32
@@ -20,6 +21,9 @@ components:
         - type: object
           properties:
             IncludeName:
+              type: boolean
+              default: true
+            IncludeAmount:
               type: boolean
               default: true
             IncludePrice:

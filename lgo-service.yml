@@ -1,0 +1,11 @@
+openapi: "3.0.2"
+info:
+  title: League Game Observer Service API
+  version: "0.0.1"
+  
+paths:
+  /test:
+    get:
+      responses:
+        "200":
+          description: OK

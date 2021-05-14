@@ -134,16 +134,16 @@ components:
         - $ref: "#/components/schemas/LeagueGameEvent"
         - type: object
           properties:
-            Player:
-              $ref: "league-player.yml/#/components/schemas/LeaguePlayer"
-            AddedItems:
+            SummonerName:
+              type: string
+            AddedItemIds:
               type: array
               item:
-                $ref: "league-item.yml/#/components/schemas/LeagueItem"
-            RemovedItems:
+                type: int32
+            RemovedItemIds:
               type: array
               item:
-                $ref: "league-item.yml/#/components/schemas/LeagueItem"
+                type: int32
 
     LeagueGameEndedEvent:
       allOf:
