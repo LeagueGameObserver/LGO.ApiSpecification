@@ -45,8 +45,7 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/LeaguePowerPlayMatchUp"
-            
-#-- concrete classes
+
     LeaguePowerPlayMatchUp:
       type: object
       properties:
@@ -56,6 +55,19 @@ components:
           type: number
           format: int32
           description: "The increase of the gold difference in the specific LeagueMatchup since the PowerPlay started. This value is always from the team's perspective that is currently having the PowerPlay."
+            
+#-- concrete classes
+
+    LeaguePlayerPowerPlayMatchUp:
+      allOf:
+        - $ref: "#/components/schemas/LeaguePowerPlayMatchUp"
+        - $ref: "league-player.yml/#/components/schemas/LeaguePlayerMatchUp"
+
+    LeagueTeamPowerPlayMatchUp:
+      allOf:
+        - $ref: "#/components/schemas/LeaguePowerPlayMatchUp"
+        - $ref: "league-team.yml/#/components/schemas/LeagueTeamMatchUp"
+
 
     LgoLeagueTimerRetrievalConfiguration:
       allOf:
